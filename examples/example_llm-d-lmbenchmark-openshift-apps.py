@@ -66,14 +66,15 @@ if __name__ == "__main__":
 
     # Create workload object
     workload_spec = LMBenchmarkWorkload.from_yaml(WORKLOAD_FILE)
+    print("workload_spec: ", workload_spec)
     workload_spec.pvc_name = workload_pvc_name
 
     # Create stack spec for the existing vllm-d deployment
     stack_spec = StackSpec(
-        name="llm-d-PrefixAwareEPP-80-5000-200-1000-10",
+        name="llm-d-KVCacheAwareEPP-appConfig",
         stack_type="vllm-d",  # This will automatically set endpoint to vllm-router-service
         refresh_interval=300,  # Refresh model list every 5 minutes
-        endpoint_url="inference-gateway2"  # Service name
+        endpoint_url="inference-gateway"  # Service name with http:// protocol
     )
 
     # USER Entry: Experiment variables
